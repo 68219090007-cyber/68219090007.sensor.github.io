@@ -7,13 +7,14 @@
 	<title>พื้นฐานเซนเซอร์ในงานอุตสาหกรรม</title>
 	<style>
 		:root {
-			--ink: #18232d;
-			--muted: #60717d;
-			--accent: #e36b2c;
-			--accent-dark: #a9471a;
+			--ink: #172b34;
+			--muted: #587078;
+			--accent: #f07b45;
+			--accent-dark: #bb4d27;
+			--teal: #167d80;
 			--paper: #fffdf8;
-			--line: #e6ddd0;
-			--background: #f1ede6;
+			--line: #d8e5e1;
+			--background: #e9f0ed;
 		}
 
 		* {
@@ -24,7 +25,7 @@
 			margin: 0;
 			color: var(--ink);
 			background: var(--background);
-			font-family: "Noto Sans Thai", Tahoma, sans-serif;
+			font-family: "Noto Sans Thai", "Leelawadee UI", Tahoma, sans-serif;
 			line-height: 1.7;
 		}
 
@@ -35,10 +36,23 @@
 		}
 
 		.hero {
+			position: relative;
+			overflow: hidden;
 			padding: clamp(2rem, 7vw, 5rem);
 			color: #fff;
-			background: linear-gradient(135deg, #263d4b, #162832);
+			background: linear-gradient(135deg, #153c43, #206b6a);
 			border-radius: 12px 12px 0 0;
+		}
+
+		.hero::after {
+			position: absolute;
+			right: -5rem;
+			bottom: -6rem;
+			width: 19rem;
+			height: 19rem;
+			border: 2rem solid rgba(240, 123, 69, 0.18);
+			border-radius: 50%;
+			content: "";
 		}
 
 		.eyebrow {
@@ -58,7 +72,7 @@
 		h1 {
 			max-width: 700px;
 			margin-bottom: 1rem;
-			font-size: clamp(2rem, 5vw, 4rem);
+			font-size: clamp(2rem, 5vw, 3.8rem);
 			line-height: 1.2;
 		}
 
@@ -71,13 +85,26 @@
 
 		.content {
 			display: grid;
-			grid-template-columns: 1.2fr 0.8fr;
+			grid-template-columns: 1.1fr 0.9fr;
 			gap: 1.5rem;
 			padding: 2rem;
 			background: var(--paper);
 			border: 1px solid var(--line);
 			border-top: 0;
 			border-radius: 0 0 12px 12px;
+		}
+
+		.section {
+			padding: 2.25rem 2rem;
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-top: 0;
+		}
+
+		.section-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1rem;
 		}
 
 		.section-label {
@@ -94,14 +121,84 @@
 			font-size: 1.7rem;
 		}
 
+		h3 {
+			margin: 0 0 0.35rem;
+			font-size: 1.05rem;
+		}
+
+		.info-card {
+			padding: 1.1rem;
+			background: #f3f8f5;
+			border: 1px solid var(--line);
+			border-radius: 8px;
+		}
+
+		.list {
+			margin: 0;
+			padding-left: 1.2rem;
+		}
+
+		.list li + li {
+			margin-top: 0.35rem;
+		}
+
 		.module {
 			display: flex;
 			min-height: 100%;
 			flex-direction: column;
 			justify-content: center;
 			padding: 1.5rem;
-			background: #fff3e8;
+			background: #fff0e6;
 			border-left: 5px solid var(--accent);
+			border-radius: 0 8px 8px 0;
+		}
+
+		.specs {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		.specs th,
+		.specs td {
+			padding: 0.7rem 0.8rem;
+			border-bottom: 1px solid var(--line);
+			text-align: left;
+			vertical-align: top;
+		}
+
+		.specs th {
+			width: 38%;
+			color: var(--teal);
+			font-weight: 700;
+		}
+
+		.pin-list {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 0.75rem;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.pin-list li {
+			padding: 0.85rem 0.65rem;
+			background: #edf7f5;
+			border-top: 4px solid var(--teal);
+			text-align: center;
+		}
+
+		.pin-list strong {
+			display: block;
+			color: var(--teal);
+		}
+
+		.note {
+			margin: 1.25rem 0 0;
+			padding: 1rem 1.15rem;
+			color: #74401e;
+			background: #fff6d9;
+			border-left: 4px solid #e8b044;
 		}
 
 		.module-name {
@@ -139,6 +236,19 @@
 				grid-template-columns: 1fr;
 				padding: 1.25rem;
 			}
+
+			.section {
+				padding: 1.5rem 1.25rem;
+			}
+
+			.section-grid,
+			.pin-list {
+				grid-template-columns: 1fr;
+			}
+
+			.pin-list li {
+				text-align: left;
+			}
 		}
 	</style>
 </head>
@@ -162,6 +272,69 @@
 				<p class="module-name">KY-028</p>
 				<p>โมดูลตรวจจับอุณหภูมิสำหรับการทดลองและศึกษาเซนเซอร์เบื้องต้น</p>
 			</aside>
+		</section>
+
+		<section class="section" aria-labelledby="fundamentals-title">
+			<p class="section-label">Sensor fundamentals</p>
+			<h2 id="fundamentals-title">เซ็นเซอร์ทำงานอย่างไร</h2>
+			<p>เซ็นเซอร์รับข้อมูลจากสิ่งแวดล้อม แล้วเปลี่ยนเป็นสัญญาณไฟฟ้าที่ Arduino, Raspberry Pi หรือไมโครคอนโทรลเลอร์นำไปประมวลผลได้</p>
+			<div class="section-grid">
+				<div class="info-card">
+					<h3>หลักการทำงาน</h3>
+					<ul class="list">
+						<li>ตรวจจับอุณหภูมิ ความดัน แสง หรือความชื้น</li>
+						<li>แปลงค่าที่วัดได้เป็นสัญญาณไฟฟ้า</li>
+						<li>ส่งข้อมูลให้ตัวประมวลผลตัดสินใจ</li>
+					</ul>
+				</div>
+				<div class="info-card">
+					<h3>ประเภทสัญญาณ</h3>
+					<ul class="list">
+						<li><strong>Analog:</strong> สัญญาณต่อเนื่องใกล้เคียงค่าจริง</li>
+						<li><strong>Digital:</strong> สัญญาณ 0/1 สำหรับตัดสินใจ</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" aria-labelledby="datasheet-title">
+			<p class="section-label">Datasheet</p>
+			<h2 id="datasheet-title">ข้อมูลทางเทคนิค KY-028</h2>
+			<table class="specs">
+				<tr><th>ชนิดเซ็นเซอร์</th><td>NTC Thermistor</td></tr>
+				<tr><th>ช่วงวัดอุณหภูมิ</th><td>ประมาณ -55°C ถึง +125°C</td></tr>
+				<tr><th>แหล่งจ่ายไฟ</th><td>3.3V ถึง 5V</td></tr>
+				<tr><th>เอาต์พุต</th><td>Analog Out และ Digital Out</td></tr>
+			</table>
+		</section>
+
+		<section class="section" aria-labelledby="connection-title">
+			<p class="section-label">Connection</p>
+			<h2 id="connection-title">ขาเชื่อมต่อกับ Arduino</h2>
+			<ul class="pin-list">
+				<li><strong>VCC</strong>ต่อ 5V</li>
+				<li><strong>GND</strong>ต่อกราวด์</li>
+				<li><strong>DO</strong>ต่อขา Digital</li>
+				<li><strong>AO</strong>ต่อขา Analog</li>
+			</ul>
+			<p class="note"><strong>หมายเหตุ:</strong> ค่า Analog มีลักษณะกลับด้าน เมื่ออุณหภูมิสูงขึ้น แรงดันที่ AO อาจลดลง ส่วนค่าขีดจำกัดของ DO ปรับได้ด้วย potentiometer</p>
+		</section>
+
+		<section class="section" aria-labelledby="use-title">
+			<p class="section-label">Applications</p>
+			<h2 id="use-title">การใช้งานที่เหมาะสม</h2>
+			<ul class="list">
+				<li>ตรวจจับอุณหภูมิแบบง่ายและสร้างระบบเตือนเมื่อร้อนเกิน</li>
+				<li>ควบคุมอุณหภูมิในอุปกรณ์อิเล็กทรอนิกส์</li>
+				<li>ทดลองเรียนรู้การอ่านค่าเซ็นเซอร์ด้วย Arduino หรือ Raspberry Pi</li>
+				<li>ประยุกต์ใช้ในระบบอัตโนมัติและ IoT</li>
+			</ul>
+		</section>
+
+		<section class="section" aria-labelledby="summary-title">
+			<p class="section-label">Summary</p>
+			<h2 id="summary-title">สรุป</h2>
+			<p>เซ็นเซอร์ช่วยให้เครื่องจักรและอุปกรณ์รับรู้สภาพแวดล้อมได้ KY-028 แสดงให้เห็นการแปลงข้อมูลอุณหภูมิเป็นสัญญาณไฟฟ้า เพื่อนำไปใช้ควบคุมและแจ้งเตือนสถานการณ์ต่าง ๆ</p>
 		</section>
 
 		<footer>รหัสนักศึกษา 68219090007</footer>
