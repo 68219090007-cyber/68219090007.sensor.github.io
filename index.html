@@ -1,11 +1,170 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="th">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>พื้นฐานเซนเซอร์ในงานอุตสาหกรรม</title>
+	<style>
+		:root {
+			--ink: #18232d;
+			--muted: #60717d;
+			--accent: #e36b2c;
+			--accent-dark: #a9471a;
+			--paper: #fffdf8;
+			--line: #e6ddd0;
+			--background: #f1ede6;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: var(--background);
+			font-family: "Noto Sans Thai", Tahoma, sans-serif;
+			line-height: 1.7;
+		}
+
+		.page {
+			width: min(100% - 2rem, 960px);
+			margin: 0 auto;
+			padding: 2rem 0;
+		}
+
+		.hero {
+			padding: clamp(2rem, 7vw, 5rem);
+			color: #fff;
+			background: linear-gradient(135deg, #263d4b, #162832);
+			border-radius: 12px 12px 0 0;
+		}
+
+		.eyebrow {
+			margin: 0 0 0.5rem;
+			color: #ffc28f;
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+		}
+
+		h1,
+		h2,
+		p {
+			margin-top: 0;
+		}
+
+		h1 {
+			max-width: 700px;
+			margin-bottom: 1rem;
+			font-size: clamp(2rem, 5vw, 4rem);
+			line-height: 1.2;
+		}
+
+		.intro {
+			max-width: 600px;
+			margin-bottom: 0;
+			color: #d9e2e5;
+			font-size: 1.1rem;
+		}
+
+		.content {
+			display: grid;
+			grid-template-columns: 1.2fr 0.8fr;
+			gap: 1.5rem;
+			padding: 2rem;
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-top: 0;
+			border-radius: 0 0 12px 12px;
+		}
+
+		.section-label {
+			margin-bottom: 0.4rem;
+			color: var(--accent-dark);
+			font-size: 0.8rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+		}
+
+		h2 {
+			margin-bottom: 0.75rem;
+			font-size: 1.7rem;
+		}
+
+		.module {
+			display: flex;
+			min-height: 100%;
+			flex-direction: column;
+			justify-content: center;
+			padding: 1.5rem;
+			background: #fff3e8;
+			border-left: 5px solid var(--accent);
+		}
+
+		.module-name {
+			margin-bottom: 0.25rem;
+			color: var(--accent-dark);
+			font-size: 2.4rem;
+			font-weight: 800;
+			line-height: 1.1;
+		}
+
+		.module p,
+		.credit {
+			margin-bottom: 0;
+			color: var(--muted);
+		}
+
+		footer {
+			padding-top: 1.25rem;
+			color: var(--muted);
+			font-size: 0.9rem;
+			text-align: center;
+		}
+
+		@media (max-width: 680px) {
+			.page {
+				width: min(100% - 1rem, 960px);
+				padding: 0.5rem 0;
+			}
+
+			.hero {
+				border-radius: 8px 8px 0 0;
+			}
+
+			.content {
+				grid-template-columns: 1fr;
+				padding: 1.25rem;
+			}
+		}
+	</style>
+</head>
 <body>
+	<main class="page">
+		<header class="hero">
+			<p class="eyebrow">20105-2022</p>
+			<h1>พื้นฐานเซนเซอร์ในงานอุตสาหกรรม</h1>
+			<p class="intro">เรียนรู้หลักการทำงานของเซนเซอร์ และการประยุกต์ใช้ในงานอุตสาหกรรม</p>
+		</header>
 
-<h1>วิชาเซ็นเซอร์อุตสาหกรรมเบื้องต้น</h1>
+		<section class="content" aria-label="รายละเอียดโครงงาน">
+			<div>
+				<p class="section-label">โครงงาน</p>
+				<h2>เซนเซอร์ตรวจจับเปลวไฟและความร้อน</h2>
+				<p class="credit">จัดทำโดย นายเตโช สงขำ<br>แผนกเทคนิคคอมพิวเตอร์ ระดับ ปวช.2</p>
+			</div>
 
-<p>68219090007 นายเตโช สงขำ</p>
+			<aside class="module">
+				<p class="section-label">โมดูลที่ใช้</p>
+				<p class="module-name">KY-028</p>
+				<p>โมดูลตรวจจับอุณหภูมิสำหรับการทดลองและศึกษาเซนเซอร์เบื้องต้น</p>
+			</aside>
+		</section>
 
+		<footer>รหัสนักศึกษา 68219090007</footer>
+	</main>
 </body>
 </html>
