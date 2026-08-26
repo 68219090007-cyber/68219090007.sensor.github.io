@@ -201,6 +201,102 @@
 			border-left: 4px solid #e8b044;
 		}
 
+		.testing {
+			background: #153c43;
+			color: #f4fbf8;
+		}
+
+		.testing .section-label {
+			color: #ffc28f;
+		}
+
+		.testing h2 {
+			color: #fff;
+		}
+
+		.steps {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			gap: 0.75rem;
+			margin: 1.5rem 0 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.steps li {
+			min-height: 8.5rem;
+			padding: 1rem;
+			background: rgba(255, 255, 255, 0.1);
+			border-top: 3px solid var(--accent);
+		}
+
+		.steps b {
+			display: block;
+			margin-bottom: 0.35rem;
+			color: #ffc28f;
+			font-size: 1.4rem;
+		}
+
+		.testing-grid {
+			display: grid;
+			grid-template-columns: 0.9fr 1.1fr;
+			gap: 1.5rem;
+			align-items: start;
+		}
+
+		.testing-grid p {
+			color: #d9e8e4;
+		}
+
+		.code-window {
+			overflow: hidden;
+			border-radius: 8px;
+			background: #10272d;
+			box-shadow: 0 12px 24px rgba(8, 29, 33, 0.2);
+		}
+
+		.window-bar {
+			padding: 0.55rem 0.85rem;
+			color: #b5d1ca;
+			background: #234b50;
+			font-size: 0.8rem;
+		}
+
+		pre {
+			overflow-x: auto;
+			margin: 0;
+			padding: 1rem;
+			color: #d8f1e8;
+			font-family: Consolas, monospace;
+			font-size: 0.85rem;
+			line-height: 1.6;
+		}
+
+		.monitor {
+			margin-top: 1rem;
+			padding: 1rem;
+			color: #baf6c8;
+			background: #101d20;
+			border-left: 4px solid #65d681;
+			font-family: Consolas, monospace;
+			font-size: 0.9rem;
+		}
+
+		.monitor-title {
+			margin-bottom: 0.4rem;
+			color: #f4fbf8;
+			font-family: "Noto Sans Thai", "Leelawadee UI", Tahoma, sans-serif;
+			font-weight: 700;
+		}
+
+		.testing .info-card {
+			color: var(--ink);
+		}
+
+		.testing + .section {
+			border-top: 1px solid var(--line);
+		}
+
 		.module-name {
 			margin-bottom: 0.25rem;
 			color: var(--accent-dark);
@@ -242,7 +338,9 @@
 			}
 
 			.section-grid,
-			.pin-list {
+			.pin-list,
+			.steps,
+			.testing-grid {
 				grid-template-columns: 1fr;
 			}
 
@@ -335,6 +433,62 @@
 			<p class="section-label">Summary</p>
 			<h2 id="summary-title">สรุป</h2>
 			<p>เซ็นเซอร์ช่วยให้เครื่องจักรและอุปกรณ์รับรู้สภาพแวดล้อมได้ KY-028 แสดงให้เห็นการแปลงข้อมูลอุณหภูมิเป็นสัญญาณไฟฟ้า เพื่อนำไปใช้ควบคุมและแจ้งเตือนสถานการณ์ต่าง ๆ</p>
+		</section>
+
+		<section class="section testing" aria-labelledby="testing-title">
+			<p class="section-label">Practical test</p>
+			<h2 id="testing-title">ออกแบบการทดสอบเพื่อแสดงผลที่ Serial Monitor</h2>
+			<div class="testing-grid">
+				<div>
+					<p>การทดสอบนี้ช่วยยืนยันว่าเซ็นเซอร์อ่านค่าได้ถูกต้อง และส่งข้อมูลจากไมโครคอนโทรลเลอร์ออกทางพอร์ต Serial ได้อย่างชัดเจน</p>
+					<div class="info-card">
+						<h3>อุปกรณ์ที่ใช้</h3>
+						<ul class="list">
+							<li>Arduino Uno หรือไมโครคอนโทรลเลอร์</li>
+							<li>เซ็นเซอร์ KY-028 และสายไฟ</li>
+							<li>คอมพิวเตอร์ที่มี Arduino IDE หรือ PlatformIO</li>
+							<li>Serial Monitor สำหรับดูผลลัพธ์</li>
+						</ul>
+					</div>
+				</div>
+				<div class="code-window">
+					<div class="window-bar">KY028_test.ino</div>
+					<pre><code>void setup() {
+  Serial.begin(9600);
+  pinMode(A0, INPUT);
+}
+
+void loop() {
+  int sensorValue = analogRead(A0);
+  Serial.print("Sensor Value: ");
+  Serial.println(sensorValue);
+  delay(1000);
+}</code></pre>
+					<div class="monitor">
+						<div class="monitor-title">Serial Monitor · 9600 baud</div>
+						<div>Sensor Value: 512</div>
+						<div>Sensor Value: 520</div>
+						<div>Sensor Value: 498</div>
+						<div>Sensor Value: 530</div>
+					</div>
+				</div>
+			</div>
+			<ol class="steps" aria-label="ขั้นตอนการทดสอบ">
+				<li><b>01</b>ต่อ VCC, GND และ Output เข้ากับบอร์ด</li>
+				<li><b>02</b>กำหนด pin input สำหรับรับข้อมูล</li>
+				<li><b>03</b>อ่านค่าเซ็นเซอร์ในแต่ละรอบ</li>
+				<li><b>04</b>ส่งค่าออกด้วยอัตรา 9600 baud</li>
+				<li><b>05</b>เปรียบเทียบค่ากับสภาพแวดล้อมจริง</li>
+			</ol>
+		</section>
+
+		<section class="section" aria-labelledby="analysis-title">
+			<p class="section-label">Result analysis</p>
+			<h2 id="analysis-title">วิเคราะห์ผลการทดสอบ</h2>
+			<div class="section-grid">
+				<div class="info-card"><h3>ทดสอบสำเร็จ</h3><p>ค่าที่แสดงเปลี่ยนแปลงตามสภาพแวดล้อม แสดงว่าการต่อวงจรและการอ่านค่าทำงานได้</p></div>
+				<div class="info-card"><h3>ควรตรวจสอบ</h3><p>หากค่าไม่เปลี่ยน ให้ตรวจสายไฟ, pin ที่กำหนด หรือสภาพของเซ็นเซอร์ และควรบันทึกผลหลายครั้งเพื่อเปรียบเทียบ</p></div>
+			</div>
 		</section>
 
 		<footer>รหัสนักศึกษา 68219090007</footer>
